@@ -15,11 +15,11 @@ function App() {
         <ScrollToTop />
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path={`${import.meta.env.BASE_URL}`} element={<HomePage />} />
+          <Route path={`${import.meta.env.BASE_URL}/about`} element={<AboutPage />} />
+          <Route path={`${import.meta.env.BASE_URL}/services`} element={<ServicesPage />} />
+          <Route path={`${import.meta.env.BASE_URL}/gallery`} element={<GalleryPage />} />
+          <Route path={`${import.meta.env.BASE_URL}/contact`} element={<ContactPage />} />
         </Routes>
       </div>
     </Router>

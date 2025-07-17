@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           <Link to="/" className="flex items-center">
             <div className="flex items-center space-x-2">
               <img 
-                src="/PIXELNEST SOLUTION LOGO (1).png" 
+                src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`}
                 alt="PixelNest Solutions" 
                 className="h-10 w-auto"
               />
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.id}
-                to={item.path}
+                to={`${import.meta.env.BASE_URL}${item.path}`} 
                 className={`transition-colors ${
                   isActive(item)
                     ? 'text-blue-600 font-medium'

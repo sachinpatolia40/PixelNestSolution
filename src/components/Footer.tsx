@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="/PIXELNEST SOLUTION LOGO (1).png" 
+                src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`} 
                 alt="PixelNest Solutions" 
                 className="h-8 w-auto"
               />
