@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Users, 
   Target, 
@@ -188,10 +189,13 @@ const AboutPage: React.FC = () => {
                 through cutting-edge solutions and creative excellence.
               </p>
               
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center">
+              <Link
+              to={`${import.meta.env.BASE_URL}/services`}  
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center"
+              >
                 Learn more about our journey
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </button>
+              </Link>
             </div>
             
             <div className="relative">
@@ -380,12 +384,18 @@ const AboutPage: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg">
+            <Link 
+            to={`${import.meta.env.BASE_URL}/contact`}
+              className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
+            >
               Start your project
-            </button>
-            <button className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg">
+            </Link>
+            <Link 
+              to={`${import.meta.env.BASE_URL}/gallary`}  
+              className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
+            >
               View our work
-            </button>
+            </Link>
           </div>
         </div>
       </section>

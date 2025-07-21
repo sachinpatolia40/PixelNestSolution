@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   ChevronRight, 
   Cpu, 
@@ -24,6 +25,7 @@ import Footer from './Footer';
 
 const HomePage: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   const carouselItems = [
     {
@@ -109,13 +111,19 @@ const HomePage: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg">
+            <Link 
+             to={`${import.meta.env.BASE_URL}/contact`}  
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center justify-center"
+            >
               Start your project
-            </button>
-            <button className="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center group text-lg">
+            </Link>
+            <Link 
+               to={`${import.meta.env.BASE_URL}/gallery`}  
+              className="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center group text-lg"
+            >
               View our portfolio
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </div>
 
           {/* Stats */}
@@ -202,9 +210,12 @@ const HomePage: React.FC = () => {
                         </div>
                         
                         {/* CTA Button */}
-                        <button className={`bg-gradient-to-r ${item.gradient} text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg`}>
+                        <Link 
+                           to={`${import.meta.env.BASE_URL}/services`}  
+                          className={`bg-gradient-to-r ${item.gradient} text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center justify-center`}
+                        >
                           Explore Service
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -392,10 +403,13 @@ const HomePage: React.FC = () => {
                     ))}
                   </div>
                   
-                  <button className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center`}>
+                  <Link 
+                     to={`${import.meta.env.BASE_URL}/services`}  
+                    className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center`}
+                  >
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -503,12 +517,18 @@ const HomePage: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg">
+            <Link 
+              to={`${import.meta.env.BASE_URL}/contact`}  
+              className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
+            >
               Start your project
-            </button>
-            <button className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg">
+            </Link>
+            <Link 
+              to={`${import.meta.env.BASE_URL}/contact`}  
+              className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
+            >
               Schedule a consultation
-            </button>
+            </Link>
           </div>
         </div>
       </section>

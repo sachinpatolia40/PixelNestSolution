@@ -30,10 +30,10 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to={`${import.meta.env.BASE_URL}`} className="flex items-center">
             <div className="flex items-center space-x-2">
               <img 
-                src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`}
+                 src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`}
                 alt="PixelNest Solutions" 
                 className="h-10 w-auto"
               />
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.id}
-                to={`${import.meta.env.BASE_URL}${item.path}`} 
+                 to={`${import.meta.env.BASE_URL}${item.path}`} 
                 className={`transition-colors ${
                   isActive(item)
                     ? 'text-blue-600 font-medium'
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Link
-              to="/contact"
+             to={`${import.meta.env.BASE_URL}/contact`}
               className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
             >
               Start Your Project
@@ -91,7 +91,7 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.id}
-                to={item.path}
+               to={`${import.meta.env.BASE_URL}/${item.path}`}
                 onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-2 transition-colors ${
                   isActive(item)
@@ -104,7 +104,7 @@ const Header: React.FC = () => {
             ))}
             <div className="px-3 py-2">
               <Link
-                to="/contact"
+               to={`${import.meta.env.BASE_URL}/contact`}
                 onClick={() => setIsMenuOpen(false)}
                 className="block w-full bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors text-center"
               >

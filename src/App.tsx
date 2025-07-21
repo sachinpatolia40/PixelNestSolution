@@ -7,6 +7,7 @@ import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import ServicesPage from './components/ServicesPage';
 import GalleryPage from './components/GalleryPage';
+import ProjectDetailPage from './components/ProjectDetailPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path={`${import.meta.env.BASE_URL}/services`} element={<ServicesPage />} />
           <Route path={`${import.meta.env.BASE_URL}/gallery`} element={<GalleryPage />} />
           <Route path={`${import.meta.env.BASE_URL}/contact`} element={<ContactPage />} />
+          <Route path={`${import.meta.env.BASE_URL}/project/:id`} element={<ProjectDetailPage />} />
         </Routes>
       </div>
     </Router>

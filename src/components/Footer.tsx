@@ -15,8 +15,21 @@ const Footer: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Newsletter subscription:', email);
-    setEmail('');
+    
+    if (!email.trim()) {
+      return;
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return;
+    }
+    
+    // Simulate newsletter subscription
+    setTimeout(() => {
+      console.log('Newsletter subscription:', email);
+      setEmail('');
+      // You could show a success message here
+    }, 1000);
   };
 
   return (

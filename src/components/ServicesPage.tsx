@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Monitor, 
   Smartphone, 
@@ -129,14 +130,21 @@ const ServicesPage: React.FC = () => {
             to help your business thrive in the digital landscape.
           </p>
           
-          <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg">
+          <Link 
+            to={`${import.meta.env.BASE_URL}/services`}  
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center justify-center"
+          >
             Explore our services
-          </button>
+          </Link>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-sm font-medium text-blue-600 mb-8">
@@ -186,10 +194,13 @@ const ServicesPage: React.FC = () => {
                     ))}
                   </ul>
                   
-                  <button className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center`}>
+                  <Link 
+                    to={`${import.meta.env.BASE_URL}/contact`}  
+                    className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center`}
+                  >
                     Learn more
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -341,12 +352,18 @@ const ServicesPage: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg">
+            <Link 
+              to={`${import.meta.env.BASE_URL}/contact`}  
+              className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
+            >
               Start your project
-            </button>
-            <button className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg">
+            </Link>
+            <Link 
+               to={`${import.meta.env.BASE_URL}/gallery`}  
+              className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
+            >
               View portfolio
-            </button>
+            </Link>
           </div>
         </div>
       </section>
