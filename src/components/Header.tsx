@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { id: 'home', label: 'Home', path: '/' },
+    { id: 'home', label: 'Home', path: '' },
     { id: 'about', label: 'About', path: '/about' },
     { id: 'services', label: 'Services', path: '/services' },
     { id: 'gallery', label: 'Gallery', path: '/gallery' },
