@@ -57,9 +57,9 @@ const AboutPage: React.FC = () => {
 
   const team = [
     {
-      name: "Sarah Johnson",
+      name: "Vishal",
       role: "CEO & Founder",
-      image: "SJ",
+      image: "VK",
       description: "Visionary leader with 10+ years in digital transformation and business strategy.",
       gradient: "from-blue-500 to-indigo-600"
     },
@@ -108,7 +108,7 @@ const AboutPage: React.FC = () => {
     {
       year: "2024",
       title: "Global Recognition",
-      description: "Won 'Digital Innovation Award' for outstanding work",
+      description: "Trusted by top brands",
       gradient: "from-orange-500 to-red-500"
     }
   ];
@@ -217,7 +217,7 @@ const AboutPage: React.FC = () => {
                     meet today's needs but anticipate tomorrow's opportunities."
                   </blockquote>
                   
-                  <cite className="text-blue-600 font-semibold text-lg">- Sarah Johnson, CEO & Founder</cite>
+                  <cite className="text-blue-600 font-semibold text-lg">- Shyam Bhalani, Founder</cite>
                 </div>
               </div>
             </div>
@@ -312,7 +312,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-indigo-50 rounded-full text-sm font-medium text-indigo-600 mb-8">
@@ -354,7 +354,7 @@ const AboutPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 relative overflow-hidden">

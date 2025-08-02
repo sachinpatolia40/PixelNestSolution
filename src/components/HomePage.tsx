@@ -438,16 +438,16 @@ const HomePage: React.FC = () => {
             {[
               {
                 quote: "PixelNest transformed our digital presence completely. Their attention to detail and innovative approach exceeded all our expectations. The results speak for themselves.",
-                author: "Sarah Johnson",
-                role: "CEO, TechVision",
+                author: "Vishal Kansagara",
+                role: "CEO, Cadge Tool",
                 rating: 5,
                 gradient: "from-blue-500 to-indigo-500",
                 bgGradient: "from-blue-50 to-indigo-50"
               },
               {
                 quote: "Working with PixelNest was a game-changer for our business. Their strategic insights and technical expertise delivered remarkable results that continue to drive our growth.",
-                author: "Michael Chen",
-                role: "Marketing Director, Innovate Inc.",
+                author: "Kishan Donga",
+                role: "Founder, Divine Decor",
                 rating: 5,
                 gradient: "from-purple-500 to-pink-500",
                 bgGradient: "from-purple-50 to-pink-50"

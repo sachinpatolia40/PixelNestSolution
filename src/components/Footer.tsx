@@ -9,6 +9,7 @@ import {
   Instagram, 
   Linkedin 
 } from 'lucide-react';
+import { ContactInformation } from "../Constant"
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -48,6 +49,7 @@ const Footer: React.FC = () => {
                 <span className="text-orange-400">Pixel</span>
                 <span className="text-purple-400">Nest</span>
                 <span className="text-white"> Solutions</span>
+                {/* {ContactInformation.CompanyName} */}
               </span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
@@ -75,15 +77,19 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center text-gray-300">
                 <Mail className="w-4 h-4 mr-3 text-blue-400 flex-shrink-0" />
-                <span className="text-sm">info@pixelnest.solutions</span>
+                <span className="text-sm">{ContactInformation.Email}</span>
               </div>
               <div className="flex items-center text-gray-300">
                 <Phone className="w-4 h-4 mr-3 text-blue-400 flex-shrink-0" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+91 {ContactInformation.MobileNumber1}</span>
+              </div>
+              <div className="flex items-center text-gray-300">
+                <Phone className="w-4 h-4 mr-3 text-blue-400 flex-shrink-0" />
+                <span className="text-sm">+91 {ContactInformation.MobileNumber2}</span>
               </div>
               <div className="flex items-start text-gray-300">
                 <MapPin className="w-4 h-4 mr-3 text-blue-400 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">123 Innovation Drive<br />Tech City, TC 10101</span>
+                <span className="text-sm">{ContactInformation.Address1}<br />{ContactInformation.City}, {ContactInformation.PinCode}</span>
               </div>
             </div>
           </div>
@@ -116,7 +122,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 PixelNest Solutions. All rights reserved.
+              © {new Date().getFullYear()} PixelNest Solutions. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>

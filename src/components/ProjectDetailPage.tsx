@@ -118,8 +118,8 @@ const ProjectDetailPage: React.FC = () => {
       ],
       testimonial: {
         quote: "PixelNest transformed our digital presence completely. The new website not only looks professional but has significantly improved our lead generation and customer engagement.",
-        author: "Sarah Johnson",
-        role: "Marketing Director",
+        author: "Vishal Kansagara",
+        role: "CEO",
         company: "CADGE Manufacturing Inc."
       },
       liveUrl: "https://cadgemanufacturing.com",

@@ -8,6 +8,7 @@ import {
   Twitter, 
   Instagram, 
   Linkedin,
+  MessageSquare,
   Send,
   Clock,
   MessageCircle,
@@ -16,6 +17,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import Footer from './Footer';
+import { ContactInformation } from '../Constant';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -125,12 +127,12 @@ const ContactPage: React.FC = () => {
     'Other'
   ];
 
-  const contactMethods = [
+  let contactMethods = [
     {
       icon: Mail,
       title: "Email Us",
       description: "Send us an email anytime",
-      contact: "info@pixelnest.solutions",
+      contact: `${ContactInformation.Email}`,
       gradient: "from-blue-500 to-indigo-600",
       bgGradient: "from-blue-50 to-indigo-50"
     },
@@ -138,19 +140,36 @@ const ContactPage: React.FC = () => {
       icon: Phone,
       title: "Call Us",
       description: "Speak with our team directly",
-      contact: "+1 (555) 123-4567",
+      contact: `+91 ${ContactInformation.MobileNumber1} `,
       gradient: "from-green-500 to-emerald-600",
       bgGradient: "from-green-50 to-emerald-50"
+    },
+    {
+      icon: MessageSquare,
+      title: "WhatsApp Us",
+      description: "Chat with us instantly",
+      contact: "Quick response guaranteed",
+      gradient: "from-green-400 to-green-600",
+      bgGradient: "from-green-50 to-green-100",
+      isWhatsApp: true
     },
     {
       icon: MapPin,
       title: "Visit Us",
       description: "Come to our office",
-      contact: "123 Innovation Drive, Tech City",
+      contact: `${ContactInformation.Address1} ${ContactInformation.City}, ${ContactInformation.PinCode} `,
       gradient: "from-purple-500 to-violet-600",
       bgGradient: "from-purple-50 to-violet-50"
     }
   ];
+
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent(
+      "Hi PixelNest Solutions! I'm interested in your digital services and would like to discuss my project requirements."
+    );
+    const whatsappUrl = `https://wa.me/${ContactInformation.MobileNumber1}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const officeHours = [
     {
@@ -233,9 +252,15 @@ const ContactPage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {contactMethods.map((method, index) => (
-              <div key={index} className={`bg-gradient-to-br ${method.bgGradient} rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden`}>
+              <div 
+                key={index} 
+                className={`bg-gradient-to-br ${method.bgGradient} rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden ${
+                  method.isWhatsApp ? 'cursor-pointer' : ''
+                }`}
+                onClick={method.isWhatsApp ? handleWhatsAppClick : undefined}
+              >
                 {/* Background decorative elements */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full"></div>
@@ -255,9 +280,19 @@ const ContactPage: React.FC = () => {
                     {method.description}
                   </p>
                   
-                  <p className="text-gray-900 font-medium">
+                  <p className={`font-medium ${method.isWhatsApp ? 'text-green-600' : 'text-gray-900'}`}>
                     {method.contact}
                   </p>
+                  
+                  {method.isWhatsApp && (
+                    <div className="mt-4">
+                      <div className="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-full text-sm font-medium shado
+                        w-lg hover:bg-green-600 transition-colors">
+                        <MessageSquare className="w-4 h-4 mr-2" />
+                        Chat Now
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -428,6 +463,13 @@ const ContactPage: React.FC = () => {
                 >
                   {isSubmitting ? (
                     <>
+                <button 
+                  onClick={handleWhatsAppClick}
+                  className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
+                >
+                  <MessageSquare className="w-5 h-5 mr-2" />
+                  WhatsApp Us
+                </button>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
                       Sending...
                     </>
@@ -598,7 +640,7 @@ const ContactPage: React.FC = () => {
               Schedule a consultation
             </button>
             <Link 
-            to={`${import.meta.env.BASE_URL}/gallery`}
+              to={`${import.meta.env.BASE_URL}/gallery`}
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
               View our portfolio
