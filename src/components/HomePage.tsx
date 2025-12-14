@@ -112,13 +112,13 @@ const HomePage: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <Link 
-             to={`${import.meta.env.BASE_URL}/contact`}  
+             to={`${import.meta.env.BASE_URL}contact`}  
               className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center justify-center"
             >
               Start your project
             </Link>
             <Link 
-               to={`${import.meta.env.BASE_URL}/gallery`}  
+               to={`${import.meta.env.BASE_URL}gallery`}  
               className="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center group text-lg"
             >
               View our portfolio
@@ -211,7 +211,7 @@ const HomePage: React.FC = () => {
                         
                         {/* CTA Button */}
                         <Link 
-                           to={`${import.meta.env.BASE_URL}/services`}  
+                           to={`${import.meta.env.BASE_URL}services`}  
                           className={`bg-gradient-to-r ${item.gradient} text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center justify-center`}
                         >
                           Explore Service
@@ -404,7 +404,7 @@ const HomePage: React.FC = () => {
                   </div>
                   
                   <Link 
-                     to={`${import.meta.env.BASE_URL}/services`}  
+                     to={`${import.meta.env.BASE_URL}services`}  
                     className={`bg-gradient-to-r ${service.gradient} text-white px-6 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center`}
                   >
                     Learn more
@@ -518,13 +518,13 @@ const HomePage: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
-              to={`${import.meta.env.BASE_URL}/contact`}  
+              to={`${import.meta.env.BASE_URL}contact`}  
               className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
             >
               Start your project
             </Link>
             <Link 
-              to={`${import.meta.env.BASE_URL}/contact`}  
+              to={`${import.meta.env.BASE_URL}contact`}  
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
               Schedule a consultation

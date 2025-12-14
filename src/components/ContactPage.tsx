@@ -522,14 +522,14 @@ const ContactPage: React.FC = () => {
                 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
-                    { icon: Facebook, name: "Facebook", color: "bg-blue-600 hover:bg-blue-700" },
-                    { icon: Twitter, name: "Twitter", color: "bg-blue-400 hover:bg-blue-500" },
-                    { icon: Instagram, name: "Instagram", color: "bg-pink-500 hover:bg-pink-600" },
-                    { icon: Linkedin, name: "LinkedIn", color: "bg-blue-700 hover:bg-blue-800" }
+                    // { icon: Facebook, name: "Facebook", color: "bg-blue-600 hover:bg-blue-700",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+                    // { icon: Twitter, name: "Twitter", color: "bg-blue-400 hover:bg-blue-500",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+                    { icon: Instagram, name: "Instagram", color: "bg-pink-500 hover:bg-pink-600",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+                    { icon: Linkedin, name: "LinkedIn", color: "bg-blue-700 hover:bg-blue-800", link:"https://www.linkedin.com/in/pixelnest-solution-147696326" }
                   ].map((social, index) => (
                     <a
                       key={index}
-                      href="#"
+                      href={social.link}
                       className={`${social.color} text-white p-4 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 shadow-lg`}
                     >
                       <social.icon className="w-5 h-5" />
@@ -548,7 +548,7 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* Office Hours */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-indigo-50 rounded-full text-sm font-medium text-indigo-600 mb-8">
@@ -570,7 +570,7 @@ const ContactPage: React.FC = () => {
             {officeHours.map((office, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 shadow-xl relative overflow-hidden">
                 {/* Background decorative elements */}
-                <div className="absolute inset-0 opacity-10">
+                {/* <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-4 right-4 w-12 h-12 bg-blue-300 rounded-full"></div>
                   <div className="absolute bottom-4 left-4 w-8 h-8 bg-indigo-300 rounded-full"></div>
                 </div>
@@ -601,7 +601,7 @@ const ContactPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 relative overflow-hidden">
@@ -640,7 +640,7 @@ const ContactPage: React.FC = () => {
               Schedule a consultation
             </button>
             <Link 
-              to={`${import.meta.env.BASE_URL}/gallery`}
+              to={`${import.meta.env.BASE_URL}gallery`}
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
               View our portfolio

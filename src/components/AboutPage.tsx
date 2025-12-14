@@ -190,7 +190,7 @@ const AboutPage: React.FC = () => {
               </p>
               
               <Link
-              to={`${import.meta.env.BASE_URL}/services`}  
+              to={`${import.meta.env.BASE_URL}services`}  
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center"
               >
                 Learn more about our journey
@@ -385,13 +385,13 @@ const AboutPage: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
-            to={`${import.meta.env.BASE_URL}/contact`}
+            to={`${import.meta.env.BASE_URL}contact`}
               className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
             >
               Start your project
             </Link>
             <Link 
-              to={`${import.meta.env.BASE_URL}/gallary`}  
+              to={`${import.meta.env.BASE_URL}gallary`}  
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
               View our work

@@ -8,10 +8,10 @@ const Header: React.FC = () => {
 
   const navItems = [
     { id: 'home', label: 'Home', path: '' },
-    { id: 'about', label: 'About', path: '/about' },
-    { id: 'services', label: 'Services', path: '/services' },
-    { id: 'gallery', label: 'Gallery', path: '/gallery' },
-    { id: 'contact', label: 'Contact', path: '/contact' }
+    { id: 'about', label: 'About', path: 'about' },
+    { id: 'services', label: 'Services', path: 'services' },
+    { id: 'gallery', label: 'Gallery', path: 'gallery' },
+    { id: 'contact', label: 'Contact', path: 'contact' }
   ];
 
   const handleNavClick = (path: string) => {
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
           <Link to={`${import.meta.env.BASE_URL}`} className="flex items-center">
             <div className="flex items-center space-x-2">
               <img 
-                 src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`}
+                 src={`${import.meta.env.BASE_URL}PIXELNEST SOLUTION LOGO (1).png`}
                 alt="PixelNest Solutions" 
                 className="h-10 w-auto"
               />
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Link
-             to={`${import.meta.env.BASE_URL}/contact`}
+             to={`${import.meta.env.BASE_URL}contact`}
               className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
             >
               Start Your Project
@@ -91,7 +91,7 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.id}
-               to={`${import.meta.env.BASE_URL}/${item.path}`}
+               to={`${import.meta.env.BASE_URL}${item.path}`}
                 onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-2 transition-colors ${
                   isActive(item)
@@ -104,7 +104,7 @@ const Header: React.FC = () => {
             ))}
             <div className="px-3 py-2">
               <Link
-               to={`${import.meta.env.BASE_URL}/contact`}
+               to={`${import.meta.env.BASE_URL}contact`}
                 onClick={() => setIsMenuOpen(false)}
                 className="block w-full bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors text-center"
               >

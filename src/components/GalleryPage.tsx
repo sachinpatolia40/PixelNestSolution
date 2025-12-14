@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Monitor, 
-  Smartphone, 
-  Share2, 
-  PenTool, 
+import {
+  Monitor,
+  Smartphone,
+  Share2,
+  PenTool,
   Search,
   Eye,
   ExternalLink,
@@ -34,25 +34,19 @@ const GalleryPage: React.FC = () => {
 
   const handleDownloadCatalog = async () => {
     setIsDownloading(true);
-    
+
     try {
       // Simulate PDF generation/download process
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      // await new Promise(resolve => setTimeout(resolve, 2000));
+
       // Create a mock PDF download
       const link = document.createElement('a');
-      link.href = '#'; // In real implementation, this would be your PDF URL
-      link.download = 'PixelNest-Solutions-Portfolio-Catalog-2025.pdf';
-      
-      // For demo purposes, show success message
-      alert('🎉 Catalog download started! In a real implementation, this would download a comprehensive PDF catalog of all our projects.');
-      
-      // In real implementation, you would:
-      // 1. Generate PDF server-side or use a service like jsPDF
-      // 2. Include all project images, descriptions, case studies
-      // 3. Add company branding and professional layout
-      // 4. Include client testimonials and metrics
-      
+      link.href = `${import.meta.env.BASE_URL}PixelNest_Solution_Catalog.pdf`; // public folder file
+      link.download = 'PixelNest_Solution_Catalog.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
     } catch (error) {
       console.error('Download failed:', error);
       alert('Download failed. Please try again.');
@@ -277,8 +271,8 @@ const GalleryPage: React.FC = () => {
     }
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   const featuredProjects = projects.filter(project => project.featured);
@@ -294,7 +288,7 @@ const GalleryPage: React.FC = () => {
           <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-200 rounded-full blur-2xl"></div>
           <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-pink-200 rounded-full blur-2xl"></div>
         </div>
-        
+
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
           <div className="mb-8">
             <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-blue-600 shadow-sm mb-8">
@@ -302,7 +296,7 @@ const GalleryPage: React.FC = () => {
               Our creative showcase
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-8 leading-tight tracking-tight">
             Portfolio
             <br />
@@ -310,12 +304,12 @@ const GalleryPage: React.FC = () => {
               excellence
             </span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto font-light leading-relaxed">
-            Discover our diverse collection of digital masterpieces, from stunning websites 
+            Discover our diverse collection of digital masterpieces, from stunning websites
             to engaging social media campaigns that drive exceptional results.
           </p>
-          
+
           {/* Enhanced Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
@@ -341,118 +335,6 @@ const GalleryPage: React.FC = () => {
       </section>
 
       {/* Featured Projects Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-orange-600 shadow-sm mb-8">
-              <Star className="w-4 h-4 mr-2" />
-              Featured projects
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
-              Our best
-              <span className="font-medium bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent"> work</span>
-            </h2>
-            
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-              Handpicked projects that showcase our expertise and creativity across different industries and technologies.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.slice(0, 6).map((project) => (
-              <div key={project.id} className="group relative">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 relative">
-                  {/* Featured Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center shadow-lg">
-                      <Star className="w-3 h-3 mr-1 fill-current" />
-                      FEATURED
-                    </div>
-                  </div>
-
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden h-64">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Overlay Actions */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex space-x-3">
-                        <Link 
-                         to={`${import.meta.env.BASE_URL}/project/${project.id}`}
-                          className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white transition-colors shadow-lg"
-                        >
-                          <Eye className="w-5 h-5" />
-                        </Link>
-                        <button className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white transition-colors shadow-lg">
-                          <ExternalLink className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Rating & Views */}
-                    <div className="absolute bottom-4 right-4 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                        <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                        <span className="text-xs font-medium text-gray-700">{project.rating}</span>
-                      </div>
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                        <Eye className="w-3 h-3 text-gray-500" />
-                        <span className="text-xs font-medium text-gray-700">{project.views}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="p-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white rounded-full text-sm font-medium shadow-sm`}>
-                        {categories.find(cat => cat.id === project.category)?.label}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-600 mb-6 leading-relaxed font-light text-sm">
-                      {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.slice(0, 3).map((tag, index) => (
-                        <span key={index} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 3 && (
-                        <span className="px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-medium">
-                          +{project.tags.length - 3} more
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Action Button */}
-                    <Link 
-                      to={`${import.meta.env.BASE_URL}/project/${project.id}`}
-                      className={`w-full bg-gradient-to-r ${project.gradient} text-white py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium text-sm flex items-center justify-center`}
-                    >
-                      View Project Details
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* PDF Catalog Download Section */}
       <section className="py-20 bg-white relative overflow-hidden">
@@ -473,7 +355,7 @@ const GalleryPage: React.FC = () => {
                     <Download className="w-4 h-4 mr-2" />
                     Complete portfolio catalog
                   </div>
-                  
+
                   <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
                     Download our
                     <br />
@@ -481,9 +363,9 @@ const GalleryPage: React.FC = () => {
                       complete catalog
                     </span>
                   </h2>
-                  
+
                   <p className="text-xl text-gray-600 mb-8 font-light leading-relaxed">
-                    Get instant access to our comprehensive portfolio catalog featuring all our projects, 
+                    Get instant access to our comprehensive portfolio catalog featuring all our projects,
                     case studies, and detailed insights into our creative process.
                   </p>
 
@@ -507,16 +389,15 @@ const GalleryPage: React.FC = () => {
                   </div>
 
                   {/* Download Button */}
-                  <button 
+                  <button
                     onClick={handleDownloadCatalog}
                     disabled={isDownloading}
-                    className={`group relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white px-10 py-5 rounded-2xl font-medium text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 ${
-                      isDownloading ? 'cursor-not-allowed opacity-75' : 'hover:from-blue-700 hover:via-indigo-700 hover:to-purple-800'
-                    }`}
+                    className={`group relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 text-white px-10 py-5 rounded-2xl font-medium text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 ${isDownloading ? 'cursor-not-allowed opacity-75' : 'hover:from-blue-700 hover:via-indigo-700 hover:to-purple-800'
+                      }`}
                   >
                     {/* Button background animation */}
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    
+
                     <div className="relative flex items-center justify-center">
                       {isDownloading ? (
                         <>
@@ -538,7 +419,7 @@ const GalleryPage: React.FC = () => {
                   {/* Download Info */}
                   <div className="flex items-center mt-6 text-sm text-gray-600">
                     <Shield className="w-4 h-4 mr-2 text-green-500" />
-                    <span>Instant download • No email required • 15.2 MB PDF</span>
+                    <span>Instant download • No email required • 16.8 MB PDF</span>
                   </div>
                 </div>
 
@@ -550,9 +431,9 @@ const GalleryPage: React.FC = () => {
                       {/* PDF Header */}
                       <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center">
-                          <img 
-                            src="/PIXELNEST SOLUTION LOGO (1).png" 
-                            alt="PixelNest Solutions" 
+                          <img
+                             src={`${import.meta.env.BASE_URL}PIXELNEST SOLUTION LOGO (1).png`}
+                            alt="PixelNest Solutions"
                             className="h-8 w-auto mr-3"
                           />
                           <span className="font-bold text-gray-900">Portfolio Catalog 2025</span>
@@ -573,8 +454,8 @@ const GalleryPage: React.FC = () => {
                             "https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=400"
                           ].map((img, index) => (
                             <div key={index} className="relative group">
-                              <img 
-                                src={img} 
+                              <img
+                                src={img}
                                 alt={`Project ${index + 1}`}
                                 className="w-full h-20 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-shadow"
                               />
@@ -614,7 +495,7 @@ const GalleryPage: React.FC = () => {
                   </div>
 
                   {/* Download stats */}
-                  <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                  {/* <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
                     <div className="bg-white rounded-2xl shadow-xl px-6 py-3 border border-gray-200">
                       <div className="flex items-center space-x-4 text-sm">
                         <div className="flex items-center text-green-600">
@@ -624,213 +505,11 @@ const GalleryPage: React.FC = () => {
                         <div className="text-gray-400">downloads this month</div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Filter Section */}
-      <section className="py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-sm font-medium text-blue-600 mb-6">
-              <Filter className="w-4 h-4 mr-2" />
-              Browse by category
-            </div>
-            <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4 tracking-tight">
-              Explore our
-              <span className="font-medium bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> complete portfolio</span>
-            </h2>
-          </div>
-
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-            {/* Enhanced Category Filters */}
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => {
-                const Icon = category.icon;
-                return (
-                  <button
-                    key={category.id}
-                    onClick={() => setActiveFilter(category.id)}
-                    className={`inline-flex items-center px-6 py-4 rounded-2xl font-medium transition-all duration-300 transform hover:scale-105 ${
-                      activeFilter === category.id
-                        ? `bg-gradient-to-r ${category.gradient} text-white shadow-xl`
-                        : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md hover:shadow-lg border border-gray-200'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5 mr-2" />
-                    {category.label}
-                    <span className={`ml-3 px-2 py-1 rounded-full text-xs font-bold ${
-                      activeFilter === category.id
-                        ? 'bg-white/20 text-white'
-                        : 'bg-gray-100 text-gray-600'
-                    }`}>
-                      {category.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Enhanced View Mode Toggle */}
-            <div className="flex items-center gap-2 bg-gray-100 rounded-2xl p-2">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-3 rounded-xl transition-all duration-300 ${
-                  viewMode === 'grid' 
-                    ? 'bg-white shadow-md text-blue-600' 
-                    : 'hover:bg-gray-200 text-gray-600'
-                }`}
-              >
-                <Grid3X3 className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-3 rounded-xl transition-all duration-300 ${
-                  viewMode === 'list' 
-                    ? 'bg-white shadow-md text-blue-600' 
-                    : 'hover:bg-gray-200 text-gray-600'
-                }`}
-              >
-                <List className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Gallery */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Results Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-900">
-                {activeFilter === 'all' ? 'All Projects' : categories.find(cat => cat.id === activeFilter)?.label}
-              </h3>
-              <p className="text-gray-600 mt-1">
-                Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}
-              </p>
-            </div>
-          </div>
-
-          <div className={`grid gap-8 ${
-            viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-              : 'grid-cols-1'
-          }`}>
-            {filteredProjects.map((project) => (
-              <div key={project.id} className="group">
-                <div className={`bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 ${
-                  viewMode === 'list' ? 'flex' : ''
-                }`}>
-                  {/* Project Image */}
-                  <div className={`relative overflow-hidden ${
-                    viewMode === 'list' ? 'w-80 flex-shrink-0' : 'h-64'
-                  }`}>
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-4 left-4">
-                        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center shadow-lg">
-                          <Star className="w-3 h-3 mr-1 fill-current" />
-                          FEATURED
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Overlay Actions */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex space-x-3">
-                        <button className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white transition-colors shadow-lg">
-                          <Eye className="w-5 h-5" />
-                        </button>
-                        <button className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white transition-colors shadow-lg">
-                          <ExternalLink className="w-5 h-5" />
-                        </button>
-                        <button className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white transition-colors shadow-lg">
-                          <Play className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Rating & Views */}
-                    <div className="absolute bottom-4 right-4 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                        <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                        <span className="text-xs font-medium text-gray-700">{project.rating}</span>
-                      </div>
-                      <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                        <Eye className="w-3 h-3 text-gray-500" />
-                        <span className="text-xs font-medium text-gray-700">{project.views}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="p-8 flex-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className={`px-3 py-1 bg-gradient-to-r ${project.gradient} text-white rounded-full text-sm font-medium shadow-sm`}>
-                        {categories.find(cat => cat.id === project.category)?.label}
-                      </span>
-                      <div className="flex items-center space-x-2">
-                        <div className="flex">
-                          {[...Array(project.rating)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-600 mb-6 leading-relaxed font-light">
-                      {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag, index) => (
-                        <span key={index} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action Button */}
-                    <Link 
-                     to={`${import.meta.env.BASE_URL}/project/${project.id}`}
-                      className={`w-full bg-gradient-to-r ${project.gradient} text-white py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-medium flex items-center justify-center`}
-                    >
-                      View Project Details
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Load More Button */}
-          {filteredProjects.length > 0 && (
-            <div className="text-center mt-16">
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center">
-                Load More Projects
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </button>
-            </div>
-          )}
         </div>
       </section>
 
@@ -842,7 +521,7 @@ const GalleryPage: React.FC = () => {
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white rounded-full blur-3xl"></div>
           <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-white rounded-full blur-2xl"></div>
         </div>
-        
+
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <div className="mb-8">
             <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-8">
@@ -850,28 +529,28 @@ const GalleryPage: React.FC = () => {
               Ready to create something amazing?
             </div>
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
             Let's bring your vision
             <br />
             <span className="font-medium">to life together</span>
           </h2>
-          
+
           <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Join our growing list of satisfied clients and let us create something 
+            Join our growing list of satisfied clients and let us create something
             extraordinary that showcases your brand and drives real results.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              to={`${import.meta.env.BASE_URL}/contact`}
+            <Link
+              to={`${import.meta.env.BASE_URL}contact`}
               className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-lg inline-flex items-center justify-center"
             >
               Start Your Project
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
-            <Link 
-              to={`${import.meta.env.BASE_URL}/contact`}
+            <Link
+              to={`${import.meta.env.BASE_URL}contact`}
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
               Get a Free Quote

@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src={`${import.meta.env.BASE_URL}/PIXELNEST SOLUTION LOGO (1).png`} 
+                src={`${import.meta.env.BASE_URL}PIXELNEST SOLUTION LOGO (1).png`} 
                 alt="PixelNest Solutions" 
                 className="h-8 w-auto"
               />
@@ -56,16 +56,16 @@ const Footer: React.FC = () => {
               Transforming ideas into exceptional digital experiences with cutting-edge technology and creative excellence.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">
+              {/* <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">
                 <Facebook className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-400 hover:text-white transition-all duration-300">
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-pink-500 hover:text-white transition-all duration-300">
+              </a> */}
+              <a href="https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-pink-500 hover:text-white transition-all duration-300">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-700 hover:text-white transition-all duration-300">
+              <a href="https://www.linkedin.com/in/pixelnest-solution-147696326" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-blue-700 hover:text-white transition-all duration-300">
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -90,12 +90,12 @@ const Footer: React.FC = () => {
               <div className="flex items-start text-gray-300">
                 <MapPin className="w-4 h-4 mr-3 text-blue-400 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">{ContactInformation.Address1}<br />{ContactInformation.City}, {ContactInformation.PinCode}</span>
-              </div>
+              </div>  
             </div>
           </div>
 
           {/* Newsletter */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4 text-white">Stay Updated</h3>
             <p className="text-gray-300 text-sm mb-4">
               Get the latest updates and insights delivered to your inbox.
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                 Subscribe
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Bar */}
@@ -124,10 +124,10 @@ const Footer: React.FC = () => {
           <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} PixelNest Solutions. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          {/* <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

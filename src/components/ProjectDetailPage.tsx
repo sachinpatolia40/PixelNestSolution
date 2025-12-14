@@ -786,7 +786,7 @@ const ProjectDetailPage: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Project Not Found</h1>
           <p className="text-gray-600 mb-8">The project you're looking for doesn't exist or has been moved.</p>
           <Link 
-             to={`${import.meta.env.BASE_URL}/gallery`}  
+             to={`${import.meta.env.BASE_URL}gallery`}  
             className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium inline-flex items-center"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -842,7 +842,7 @@ const ProjectDetailPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => navigate(`${import.meta.env.BASE_URL}/gallery`)}
+                onClick={() => navigate(`${import.meta.env.BASE_URL}gallery`)}
                 className="flex items-center text-gray-600 hover:text-blue-600 transition-colors group"
               >
                 <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -971,7 +971,7 @@ const ProjectDetailPage: React.FC = () => {
                 )}
                 {!project.liveUrl && !project.githubUrl && (
                   <Link
-                    to={`${import.meta.env.BASE_URL}/contact`}  
+                    to={`${import.meta.env.BASE_URL}contact`}  
                     className={`bg-gradient-to-r ${project.gradient} text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all duration-300 transform hover:scale-105 font-semibold text-lg inline-flex items-center justify-center`}
                   >
                     <Target className="w-5 h-5 mr-2" />
@@ -1333,13 +1333,13 @@ const ProjectDetailPage: React.FC = () => {
                   
                   <div className="space-y-3">
                     <Link 
-                      to={`${import.meta.env.BASE_URL}/contact`}  
+                      to={`${import.meta.env.BASE_URL}contact`}  
                       className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-center block"
                     >
                       Start Similar Project
                     </Link>
                     <Link 
-                       to={`${import.meta.env.BASE_URL}/gallery`}  
+                       to={`${import.meta.env.BASE_URL}gallery`}  
                       className="w-full border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 font-medium text-center block"
                     >
                       View More Projects
@@ -1376,7 +1376,7 @@ const ProjectDetailPage: React.FC = () => {
               {relatedProjects.map((relatedProject) => (
                 <Link
                   key={relatedProject.id}
-                   to={`${import.meta.env.BASE_URL}/project/${relatedProject.id}`}
+                   to={`${import.meta.env.BASE_URL}project/${relatedProject.id}`}
                   className="group"
                 >
                   <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
@@ -1433,7 +1433,7 @@ const ProjectDetailPage: React.FC = () => {
             
             <div className="text-center mt-12">
               <Link 
-                 to={`${import.meta.env.BASE_URL}/gallery`}  
+                 to={`${import.meta.env.BASE_URL}gallery`}  
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-4 rounded-full hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-medium text-lg inline-flex items-center"
               >
                 View All Projects
@@ -1473,14 +1473,14 @@ const ProjectDetailPage: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
-             to={`${import.meta.env.BASE_URL}/contact`}
+             to={`${import.meta.env.BASE_URL}contact`}
               className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg inline-flex items-center justify-center"
             >
               <Target className="w-5 h-5 mr-2" />
               Start Your Project
             </Link>
             <Link 
-             to={`${import.meta.env.BASE_URL}/gallary`}
+             to={`${import.meta.env.BASE_URL}gallary`}
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center"
             >
               <Eye className="w-5 h-5 mr-2" />
