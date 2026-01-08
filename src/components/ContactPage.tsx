@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
-  Twitter, 
-  Instagram, 
+import emailjs from '@emailjs/browser';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
   Linkedin,
   MessageSquare,
   Send,
@@ -20,6 +21,8 @@ import Footer from './Footer';
 import { ContactInformation } from '../Constant';
 
 const ContactPage: React.FC = () => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,13 +36,13 @@ const ContactPage: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -51,68 +54,69 @@ const ContactPage: React.FC = () => {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    
+
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Invalid email address';
     }
-    
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long';
+
+    if (!formData.message.trim() || formData.message.length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const sendEmail = async (data: typeof formData) => {
-    // Simulate API call - replace with your actual email service
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Simulate success/failure
-        if (Math.random() > 0.1) { // 90% success rate for demo
-          resolve({ success: true });
-        } else {
-          reject(new Error('Failed to send email'));
-        }
-      }, 2000);
-    });
+
+  const sendEmail = async (): Promise<void> => {
+    if (!formRef.current) return;
+    try {
+      const response = await emailjs.sendForm(
+        'service_cdj4jlt',
+        'template_mghadhe',
+        formRef.current,
+        'YB8oXnluu5N1olY1w'
+      );
+
+      console.log('SUCCESS!', response);
+    } catch (error) {
+      console.error('FAILED...', error);
+      throw error; // let the caller handle UI state
+    }
   };
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    
-    sendEmail(formData)
-      .then(() => {
-        setSubmitStatus('success');
-        setFormData({ 
-          name: '', 
-          email: '', 
-          phone: '', 
-          company: '', 
-          service: '', 
-          message: '' 
-        });
-      })
-      .catch(() => {
-        setSubmitStatus('error');
-      })
-      .finally(() => {
-        setIsSubmitting(false);
+
+    try {
+      await sendEmail()
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        message: ''
       });
+    }
+    catch (error) {
+      setSubmitStatus('error');
+    }
+    finally {
+      setIsSubmitting(false);
+    }
+
   };
 
   const services = [
@@ -204,7 +208,7 @@ const ContactPage: React.FC = () => {
           <div className="absolute bottom-20 right-20 w-40 h-40 bg-indigo-200 rounded-full blur-3xl"></div>
           <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-200 rounded-full blur-2xl"></div>
         </div>
-        
+
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
           <div className="mb-8">
             <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-sm font-medium text-blue-600 shadow-sm mb-8">
@@ -212,7 +216,7 @@ const ContactPage: React.FC = () => {
               Get in touch with us
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-8 leading-tight tracking-tight">
             Let's start a
             <br />
@@ -220,13 +224,13 @@ const ContactPage: React.FC = () => {
               conversation
             </span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto font-light leading-relaxed">
-            We'd love to hear from you. Reach out with any questions, ideas, or projects. 
+            We'd love to hear from you. Reach out with any questions, ideas, or projects.
             Our team is here to help bring your vision to life.
           </p>
-          
-          <button 
+
+          <button
             onClick={() => {
               document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
             }}
@@ -245,7 +249,7 @@ const ContactPage: React.FC = () => {
               <Phone className="w-4 h-4 mr-2" />
               Multiple ways to connect
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
               Choose your preferred
               <span className="font-medium bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> contact method</span>
@@ -254,11 +258,10 @@ const ContactPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {contactMethods.map((method, index) => (
-              <div 
-                key={index} 
-                className={`bg-gradient-to-br ${method.bgGradient} rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden ${
-                  method.isWhatsApp ? 'cursor-pointer' : ''
-                }`}
+              <div
+                key={index}
+                className={`bg-gradient-to-br ${method.bgGradient} rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden ${method.isWhatsApp ? 'cursor-pointer' : ''
+                  }`}
                 onClick={method.isWhatsApp ? handleWhatsAppClick : undefined}
               >
                 {/* Background decorative elements */}
@@ -266,24 +269,24 @@ const ContactPage: React.FC = () => {
                   <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full"></div>
                   <div className="absolute bottom-4 left-4 w-8 h-8 bg-white rounded-full"></div>
                 </div>
-                
+
                 <div className="relative z-10">
                   <div className={`w-16 h-16 bg-gradient-to-r ${method.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}>
                     <method.icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
                     {method.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 mb-4 font-light">
                     {method.description}
                   </p>
-                  
+
                   <p className={`font-medium ${method.isWhatsApp ? 'text-green-600' : 'text-gray-900'}`}>
                     {method.contact}
                   </p>
-                  
+
                   {method.isWhatsApp && (
                     <div className="mt-4">
                       <div className="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-full text-sm font-medium shado
@@ -310,13 +313,13 @@ const ContactPage: React.FC = () => {
                 <Send className="w-4 h-4 mr-2" />
                 Send us a message
               </div>
-              
+
               <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-8 tracking-tight">
                 Tell us about your
                 <span className="font-medium bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> project</span>
               </h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+
+              <form onSubmit={handleSubmit} ref={formRef} className="space-y-6">
                 {/* Success Message */}
                 {submitStatus === 'success' && (
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-4 flex items-center">
@@ -327,7 +330,7 @@ const ContactPage: React.FC = () => {
                     </div>
                   </div>
                 )}
-                
+
                 {/* Error Message */}
                 {submitStatus === 'error' && (
                   <div className="bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 rounded-2xl p-4 flex items-center">
@@ -338,7 +341,7 @@ const ContactPage: React.FC = () => {
                     </div>
                   </div>
                 )}
-                
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Full Name *
@@ -350,16 +353,15 @@ const ContactPage: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm ${
-                      errors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
-                    }`}
+                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm ${errors.name ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                      }`}
                     required
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600">{errors.name}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email Address *
@@ -371,16 +373,15 @@ const ContactPage: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your email address"
-                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm ${
-                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
-                    }`}
+                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm ${errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                      }`}
                     required
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600">{errors.email}</p>
                   )}
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
@@ -396,7 +397,7 @@ const ContactPage: React.FC = () => {
                       className="w-full px-6 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/80 backdrop-blur-sm"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                       Company Name
@@ -412,7 +413,7 @@ const ContactPage: React.FC = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
                     Service Interested In
@@ -430,7 +431,7 @@ const ContactPage: React.FC = () => {
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     Project Details *
@@ -442,34 +443,32 @@ const ContactPage: React.FC = () => {
                     onChange={handleInputChange}
                     placeholder="Tell us about your project, goals, and requirements..."
                     rows={6}
-                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none bg-white/80 backdrop-blur-sm ${
-                      errors.message ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
-                    }`}
+                    className={`w-full px-6 py-4 border rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none bg-white/80 backdrop-blur-sm ${errors.message ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                      }`}
                     required
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-600">{errors.message}</p>
                   )}
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-8 py-4 rounded-2xl font-medium text-lg inline-flex items-center justify-center transition-all duration-300 ${
-                    isSubmitting
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-xl transform hover:scale-105'
-                  }`}
+                  className={`w-full px-8 py-4 rounded-2xl font-medium text-lg inline-flex items-center justify-center transition-all duration-300 ${isSubmitting
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-xl transform hover:scale-105'
+                    }`}
                 >
                   {isSubmitting ? (
                     <>
-                <button 
-                  onClick={handleWhatsAppClick}
-                  className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
-                >
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  WhatsApp Us
-                </button>
+                      <button
+                        onClick={handleWhatsAppClick}
+                        className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
+                      >
+                        <MessageSquare className="w-5 h-5 mr-2" />
+                        WhatsApp Us
+                      </button>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
                       Sending...
                     </>
@@ -480,7 +479,7 @@ const ContactPage: React.FC = () => {
                     </>
                   )}
                 </button>
-                
+
                 <p className="text-sm text-gray-600 font-light">
                   By submitting this form, you agree to our privacy policy. We'll respond within 24 hours. Fields marked with * are required.
                 </p>
@@ -497,7 +496,7 @@ const ContactPage: React.FC = () => {
                   <div className="absolute bottom-6 left-6 w-16 h-16 bg-white rounded-full"></div>
                   <div className="absolute top-1/2 left-1/2 w-12 h-12 bg-white rounded-full"></div>
                 </div>
-                
+
                 <div className="relative z-10 text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <MapPin className="w-8 h-8 text-white" />
@@ -505,7 +504,7 @@ const ContactPage: React.FC = () => {
                   <p className="text-gray-700 font-semibold text-lg">PixelNest Solutions HQ</p>
                   <p className="text-gray-600">Interactive Location Map</p>
                 </div>
-                
+
                 {/* Map grid pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
@@ -519,13 +518,13 @@ const ContactPage: React.FC = () => {
               {/* Social Media Links */}
               <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6">Connect With Us</h3>
-                
+
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
                     // { icon: Facebook, name: "Facebook", color: "bg-blue-600 hover:bg-blue-700",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
                     // { icon: Twitter, name: "Twitter", color: "bg-blue-400 hover:bg-blue-500",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
-                    { icon: Instagram, name: "Instagram", color: "bg-pink-500 hover:bg-pink-600",link:"https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
-                    { icon: Linkedin, name: "LinkedIn", color: "bg-blue-700 hover:bg-blue-800", link:"https://www.linkedin.com/in/pixelnest-solution-147696326" }
+                    { icon: Instagram, name: "Instagram", color: "bg-pink-500 hover:bg-pink-600", link: "https://www.instagram.com/pixelnest_solution?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+                    { icon: Linkedin, name: "LinkedIn", color: "bg-blue-700 hover:bg-blue-800", link: "https://www.linkedin.com/in/pixelnest-solution-147696326" }
                   ].map((social, index) => (
                     <a
                       key={index}
@@ -537,7 +536,7 @@ const ContactPage: React.FC = () => {
                     </a>
                   ))}
                 </div>
-                
+
                 <p className="text-gray-600 text-sm font-light">
                   Follow us on social media for the latest updates, insights, and behind-the-scenes content.
                 </p>
@@ -570,7 +569,7 @@ const ContactPage: React.FC = () => {
             {officeHours.map((office, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 shadow-xl relative overflow-hidden">
                 {/* Background decorative elements */}
-                {/* <div className="absolute inset-0 opacity-10">
+      {/* <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-4 right-4 w-12 h-12 bg-blue-300 rounded-full"></div>
                   <div className="absolute bottom-4 left-4 w-8 h-8 bg-indigo-300 rounded-full"></div>
                 </div>
@@ -610,7 +609,7 @@ const ContactPage: React.FC = () => {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <div className="mb-8">
             <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-8">
@@ -618,20 +617,20 @@ const ContactPage: React.FC = () => {
               Ready to start your project?
             </div>
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
             Let's turn your ideas into
             <br />
             <span className="font-medium">digital reality</span>
           </h2>
-          
+
           <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Whether you have a clear vision or just an idea, we're here to help you 
+            Whether you have a clear vision or just an idea, we're here to help you
             create something extraordinary. Let's start the conversation today.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button 
+            <button
               onClick={() => {
                 document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -639,7 +638,7 @@ const ContactPage: React.FC = () => {
             >
               Schedule a consultation
             </button>
-            <Link 
+            <Link
               to={`${import.meta.env.BASE_URL}gallery`}
               className="border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 font-medium text-lg inline-flex items-center justify-center"
             >
